@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GOLDLON MUSK — $GOLDLON</title>
+  <meta name="description" content="Goldlon Musk ($GOLDLON) — a gold-leaf meme on Robinhood ETH. Buy on Uniswap." />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            leaf: {
+              950: '#03140c',
+              900: '#062418',
+              800: '#0a3a26',
+              700: '#0f5235',
+              600: '#167a4c',
+              500: '#1f9a60',
+              400: '#3db87a',
+            },
+            gilt: {
+              light: '#fcf6ba',
+              DEFAULT: '#d4af37',
+              mid: '#c5a028',
+              deep: '#8a6a1a',
+              bronze: '#5c4510',
+            },
+          },
+          fontFamily: {
+            display: ['Cinzel', 'serif'],
+            sans: ['Syne', 'sans-serif'],
+          },
+          backgroundImage: {
+            'gold-leaf': 'linear-gradient(135deg, #8a6a1a 0%, #d4af37 22%, #fcf6ba 45%, #c5a028 58%, #aa771c 72%, #fcf6ba 88%, #8a6a1a 100%)',
+            'gold-shine': 'linear-gradient(110deg, #8a6a1a 0%, #d4af37 25%, #fff8d0 50%, #d4af37 75%, #8a6a1a 100%)',
+            'gallery': 'radial-gradient(ellipse 80% 60% at 50% 0%, #0f5235 0%, #062418 45%, #03140c 100%)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-light: #fcf6ba;
+      --leaf: #0a3a26;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #03140c;
+      color: #e8f5ee;
+      overflow-x: hidden;
+    }
+
+    /* Gold-leaf foil texture overlay */
+    .foil-noise::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    .gold-text {
+      background: linear-gradient(135deg, #8a6a1a 0%, #d4af37 25%, #fcf6ba 50%, #d4af37 75%, #aa771c 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: goldShimmer 6s ease-in-out infinite;
+    }
+
+    @keyframes goldShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Gold pumping hover */
+    .gold-pump {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.35s ease,
+                  filter 0.35s ease;
+    }
+
+    .gold-pump:hover {
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.85))
+               drop-shadow(0 0 28px rgba(252, 246, 186, 0.45));
+      animation: pumpPulse 0.7s ease-in-out infinite alternate;
+    }
+
+    .gold-pump-btn {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.35s ease,
+                  filter 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gold-pump-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -80%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.5s ease;
+    }
+
+    .gold-pump-btn:hover::after { left: 140%; }
+
+    .gold-pump-btn:hover {
+      transform: scale(1.06);
+      box-shadow:
+        0 0 0 2px rgba(252, 246, 186, 0.5),
+        0 0 24px rgba(212, 175, 55, 0.9),
+        0 0 48px rgba(212, 175, 55, 0.45),
+        0 8px 24px rgba(0, 0, 0, 0.4);
+      animation: pumpPulse 0.65s ease-in-out infinite alternate;
+    }
+
+    @keyframes pumpPulse {
+      from { filter: brightness(1) drop-shadow(0 0 8px rgba(212, 175, 55, 0.6)); }
+      to { filter: brightness(1.15) drop-shadow(0 0 22px rgba(252, 246, 186, 0.9)); }
+    }
+
+    .gold-pump-text:hover {
+      animation: pumpPulse 0.65s ease-in-out infinite alternate;
+      transform: scale(1.04);
+    }
+
+    .gold-pump-text {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Frame like a gallery portrait */
+    .portrait-frame {
+      border: 3px solid transparent;
+      background:
+        linear-gradient(#062418, #062418) padding-box,
+        linear-gradient(135deg, #8a6a1a, #fcf6ba, #d4af37, #aa771c, #fcf6ba, #8a6a1a) border-box;
+      box-shadow:
+        0 0 0 1px rgba(212, 175, 55, 0.3),
+        0 20px 50px rgba(0, 0, 0, 0.55),
+        inset 0 0 40px rgba(212, 175, 55, 0.05);
+    }
+
+    .step-num {
+      background: linear-gradient(135deg, #8a6a1a, #d4af37, #fcf6ba, #c5a028);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d4af37 20%, #fcf6ba 50%, #d4af37 80%, transparent);
+    }
+
+    .hero-banner {
+      animation: heroDrift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroDrift {
+      from { transform: scale(1.02) translateY(0); }
+      to { transform: scale(1.08) translateY(-2%); }
+    }
+
+    .float-logo {
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .ca-copied {
+      animation: copyFlash 0.6s ease;
+    }
+
+    @keyframes copyFlash {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.8); }
+      50% { box-shadow: 0 0 24px 4px rgba(212, 175, 55, 0.9); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+
+    /* Leaf motif watermark */
+    .leaf-motif {
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(31, 154, 96, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 35%);
+    }
+
+    .dex-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .social-x {
+      background: #0a0a0a;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased leaf-motif foil-noise relative">
+
+  <!-- NAV -->
+  <header class="fixed top-0 inset-x-0 z-50 border-b border-gilt/20 bg-leaf-950/80 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#top" class="gold-pump flex items-center gap-3">
+        <img src="logo.png" alt="GOLDLON logo" class="h-11 w-11 rounded-full object-cover portrait-frame sm:h-12 sm:w-12" />
+        <div class="leading-tight">
+          <span class="font-display text-sm font-bold tracking-[0.12em] gold-text sm:text-base">GOLDLON MUSK</span>
+          <span class="block text-[10px] tracking-[0.35em] text-gilt/70 sm:text-xs">$GOLDLON</span>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-8 md:flex">
+        <a href="#how-to-buy" class="gold-pump-text text-sm tracking-wide text-leaf-400 hover:text-gilt-light">How to Buy</a>
+        <a href="#chart" class="gold-pump-text text-sm tracking-wide text-leaf-400 hover:text-gilt-light">Chart</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://t.me/goldlon_musk" target="_blank" rel="noopener noreferrer" class="gold-pump block" aria-label="Telegram">
+          <img src="tg.png" alt="Telegram" class="h-9 w-9 rounded-full object-cover sm:h-10 sm:w-10" />
+        </a>
+        <a href="https://x.com/goldlon_musk" target="_blank" rel="noopener noreferrer" class="gold-pump social-x block h-9 w-9 sm:h-10 sm:w-10" aria-label="X / Twitter">
+          <img src="x.png" alt="X" class="h-full w-full object-cover" />
+        </a>
+        <a href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=0xcomingsoon" target="_blank" rel="noopener noreferrer"
+           class="gold-pump-btn hidden rounded-sm bg-gold-leaf px-4 py-2 font-display text-xs font-bold tracking-widest text-leaf-950 sm:inline-block sm:text-sm">
+          BUY NOW
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO: full-bleed banner -->
+    <section class="relative min-h-[100svh] overflow-hidden">
+      <div class="absolute inset-0">
+        <img src="banner.png" alt="Gold-leaf portrait of Goldlon Musk" class="hero-banner h-full w-full object-cover object-center" />
+        <div class="absolute inset-0 bg-gradient-to-b from-leaf-950/55 via-leaf-950/40 to-leaf-950"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-leaf-950/70 via-transparent to-leaf-950/50"></div>
+      </div>
+
+      <div class="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20">
+        <div class="max-w-2xl">
+          <p class="mb-3 font-display text-xs tracking-[0.4em] text-gilt-light/80 uppercase">Kennedy Leaf Edition</p>
+          <h1 class="font-display text-4xl font-bold leading-[1.05] tracking-wide sm:text-6xl md:text-7xl">
+            <span class="gold-text">GOLDLON</span><br />
+            <span class="text-white">MUSK</span>
+          </h1>
+          <p class="mt-4 max-w-md text-base text-leaf-400 sm:text-lg">
+            A gold-leaf meme immortalized on Robinhood ETH. When something is important enough — you buy $GOLDLON.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=0xcomingsoon" target="_blank" rel="noopener noreferrer"
+               class="gold-pump-btn inline-flex items-center justify-center rounded-sm bg-gold-leaf px-7 py-3.5 font-display text-sm font-bold tracking-[0.2em] text-leaf-950">
+              BUY NOW
+            </a>
+            <a href="https://dexscreener.com/robinhood/TBA" target="_blank" rel="noopener noreferrer"
+               class="gold-pump-btn inline-flex items-center justify-center rounded-sm border-2 border-gilt bg-leaf-900/60 px-7 py-3.5 font-display text-sm font-bold tracking-[0.2em] text-gilt-light backdrop-blur-sm">
+              CHART
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CA + ticker strip -->
+    <section class="relative border-y border-gilt/15 bg-leaf-900/60 py-8">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex items-center gap-4">
+            <img src="logo.png" alt="" class="float-logo gold-pump h-16 w-16 rounded-full object-cover portrait-frame" />
+            <div>
+              <p class="font-display text-lg font-semibold tracking-widest gold-text">$GOLDLON</p>
+              <p class="text-sm text-leaf-400">Contract Address</p>
+            </div>
+          </div>
+
+          <div id="ca-box" class="flex flex-1 flex-col gap-2 sm:max-w-xl sm:flex-row sm:items-center">
+            <code id="ca-address" class="flex-1 truncate rounded-sm border border-gilt/30 bg-leaf-950 px-4 py-3 font-mono text-xs text-gilt-light sm:text-sm">
+              0xcomingsoon
+            </code>
+            <button type="button" id="copy-ca"
+                    class="gold-pump-btn shrink-0 rounded-sm bg-gold-leaf px-5 py-3 font-display text-xs font-bold tracking-widest text-leaf-950">
+              COPY CA
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO BUY -->
+    <section id="how-to-buy" class="relative py-20 sm:py-28">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="mb-4 section-rule"></div>
+        <header class="mb-14 max-w-xl">
+          <h2 class="font-display text-3xl font-bold tracking-wide sm:text-5xl">
+            <span class="gold-text">How to Buy</span>
+          </h2>
+          <p class="mt-3 text-leaf-400">Four steps to claim your gold-leaf portrait with Robinhood ETH.</p>
+        </header>
+
+        <ol class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <li class="gold-pump group">
+            <span class="step-num font-display text-5xl font-bold">01</span>
+            <h3 class="mt-3 font-display text-lg tracking-wide text-gilt-light">Get a Wallet</h3>
+            <p class="mt-2 text-sm leading-relaxed text-leaf-400">
+              Install MetaMask or another Web3 wallet. Fund it and switch to the <span class="text-gilt">Robinhood</span> network.
+            </p>
+          </li>
+          <li class="gold-pump group">
+            <span class="step-num font-display text-5xl font-bold">02</span>
+            <h3 class="mt-3 font-display text-lg tracking-wide text-gilt-light">Buy Robinhood ETH</h3>
+            <p class="mt-2 text-sm leading-relaxed text-leaf-400">
+              Acquire ETH on the Robinhood chain — this is the gas and swap currency for $GOLDLON.
+            </p>
+          </li>
+          <li class="gold-pump group">
+            <span class="step-num font-display text-5xl font-bold">03</span>
+            <h3 class="mt-3 font-display text-lg tracking-wide text-gilt-light">Open Uniswap</h3>
+            <p class="mt-2 text-sm leading-relaxed text-leaf-400">
+              Go to Uniswap, select chain <span class="text-gilt">Robinhood</span>, and paste the $GOLDLON contract address.
+            </p>
+          </li>
+          <li class="gold-pump group">
+            <span class="step-num font-display text-5xl font-bold">04</span>
+            <h3 class="mt-3 font-display text-lg tracking-wide text-gilt-light">Swap for $GOLDLON</h3>
+            <p class="mt-2 text-sm leading-relaxed text-leaf-400">
+              Swap your Robinhood ETH for $GOLDLON. Confirm the trade — your gold-leaf bag is secured.
+            </p>
+          </li>
+        </ol>
+
+        <div class="mt-14 flex flex-wrap gap-3">
+          <a href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=0xcomingsoon" target="_blank" rel="noopener noreferrer"
+             class="gold-pump-btn inline-flex rounded-sm bg-gold-leaf px-7 py-3.5 font-display text-sm font-bold tracking-[0.2em] text-leaf-950">
+            BUY NOW
+          </a>
+          <a href="https://dexscreener.com/robinhood/TBA" target="_blank" rel="noopener noreferrer"
+             class="gold-pump-btn inline-flex rounded-sm border-2 border-gilt px-7 py-3.5 font-display text-sm font-bold tracking-[0.2em] text-gilt-light">
+            CHART
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY QUOTE -->
+    <section class="relative overflow-hidden py-16">
+      <div class="absolute inset-0 opacity-20">
+        <img src="banner.png" alt="" class="h-full w-full object-cover object-[center_30%]" />
+      </div>
+      <div class="absolute inset-0 bg-leaf-950/85"></div>
+      <blockquote class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+        <p class="font-display text-xl italic leading-relaxed text-gilt-light sm:text-2xl md:text-3xl">
+          “When something is important enough, you do it even if the odds are not in your favor.”
+        </p>
+        <footer class="mt-6 font-display text-sm tracking-[0.3em] text-gilt uppercase">— Elon Musk</footer>
+      </blockquote>
+    </section>
+    <div style="display: flex; justify-content: center;">
+      <blockquote class="twitter-tweet"><p lang="en" dir="ltr">A gold-leaf portrait of Elon Musk on display at the Kennedy Center in Washington, D.C. <a href="https://t.co/AZx97SLeph">pic.twitter.com/AZx97SLeph</a></p>&mdash; DogeDesigner (@cb_doge) <a href="https://x.com/cb_doge/status/2079162899801759881?ref_src=twsrc%5Etfw">July 20, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <!-- CHART / DEXSCREENER -->
+    <section id="chart" class="relative py-20 sm:py-28">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="mb-4 section-rule"></div>
+        <header class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 class="font-display text-3xl font-bold tracking-wide sm:text-5xl">
+              <span class="gold-text">Live Chart</span>
+            </h2>
+            <p class="mt-3 text-leaf-400">Dexscreener · Robinhood · $GOLDLON</p>
+          </div>
+          <a href="https://dexscreener.com/robinhood/TBA" target="_blank" rel="noopener noreferrer"
+             class="gold-pump-btn inline-flex self-start rounded-sm border border-gilt/50 px-5 py-2.5 font-display text-xs font-bold tracking-widest text-gilt-light">
+            OPEN DEXSCREENER
+          </a>
+        </header>
+
+        <div class="portrait-frame gold-pump overflow-hidden">
+          <div class="dex-wrap aspect-[16/11] w-full bg-leaf-950 sm:aspect-[16/9]">
+            <iframe
+              title="GOLDLON Dexscreener Chart"
+              src="https://dexscreener.com/robinhood/TBA?embed=1&theme=dark&trades=0&info=0"
+              allow="clipboard-write"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="relative pb-24 pt-8">
+      <div class="mx-auto max-w-6xl px-4 text-center sm:px-6">
+        <img src="logo.png" alt="GOLDLON" class="gold-pump float-logo mx-auto mb-8 h-28 w-28 rounded-full object-cover portrait-frame sm:h-36 sm:w-36" />
+        <h2 class="font-display text-3xl font-bold tracking-wide sm:text-4xl">
+          <span class="gold-text">Join the Gold Leaf</span>
+        </h2>
+        <p class="mx-auto mt-3 max-w-md text-leaf-400">Follow the portrait. Hold the leaf. $GOLDLON on Robinhood ETH.</p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a href="https://t.me/goldlon_musk" target="_blank" rel="noopener noreferrer" class="gold-pump" aria-label="Telegram">
+            <img src="tg.png" alt="Telegram" class="h-14 w-14 rounded-full object-cover" />
+          </a>
+          <a href="https://x.com/goldlon_musk" target="_blank" rel="noopener noreferrer" class="gold-pump social-x block h-14 w-14" aria-label="X">
+            <img src="x.png" alt="X" class="h-full w-full object-cover" />
+          </a>
+        </div>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=0xcomingsoon" target="_blank" rel="noopener noreferrer"
+             class="gold-pump-btn inline-flex rounded-sm bg-gold-leaf px-8 py-4 font-display text-sm font-bold tracking-[0.25em] text-leaf-950">
+            BUY NOW
+          </a>
+          <a href="https://dexscreener.com/robinhood/TBA" target="_blank" rel="noopener noreferrer"
+             class="gold-pump-btn inline-flex rounded-sm border-2 border-gilt px-8 py-4 font-display text-sm font-bold tracking-[0.25em] text-gilt-light">
+            CHART
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-gilt/15 bg-leaf-950 py-8">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6">
+      <p class="font-display text-xs tracking-[0.25em] text-gilt/60">© 2026 GOLDLON MUSK · $GOLDLON</p>
+      <p class="text-center text-[11px] text-leaf-400/70">Meme coin. Not financial advice. DYOR.</p>
+    </div>
+  </footer>
+
+  <script>
+    const ca = '0xcomingsoon';
+    const btn = document.getElementById('copy-ca');
+    const box = document.getElementById('ca-box');
+    const label = btn.textContent;
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(ca);
+        btn.textContent = 'COPIED!';
+        box.classList.add('ca-copied');
+        setTimeout(() => {
+          btn.textContent = label;
+          box.classList.remove('ca-copied');
+        }, 1600);
+      } catch {
+        const range = document.createRange();
+        range.selectNode(document.getElementById('ca-address'));
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        btn.textContent = 'SELECT & COPY';
+      }
+    });
+  </script>
+</body>
+</html>
